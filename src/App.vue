@@ -3,7 +3,9 @@
     <SidebarComponent></SidebarComponent>
     <NavbarComponent></NavbarComponent>
   </div>
-  <router-view></router-view>
+  <div class="lg:pl-96 pl-0">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script setup>
