@@ -39,11 +39,9 @@
     const route = useRoute()
 
     function isActive(name) {
-        // Memeriksa apakah path saat ini termasuk href
-        console.log(name)
-        console.log(route.name)
-        // return route.name.startsWith(name)
+        return route.name === name
     }
+
 
     const mains = [
         {

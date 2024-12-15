@@ -9,16 +9,6 @@ const router = createRouter({
             name: 'Beranda',
             component: Home
         },
-        {
-            path: '/update',
-            name: 'Beranda',
-            component: Home
-        },
-        {
-            path: '/sirkel',
-            name: 'Beranda',
-            component: Home
-        },
     ]
 })
 
