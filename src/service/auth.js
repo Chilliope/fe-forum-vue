@@ -15,7 +15,28 @@ export default function useAuth() {
         }
     }
 
+    async function login(payload) {
+        try {
+            const response = await axios.post('/login', payload)
+            setToken(response.data.data.token)
+            router.push('/')
+        } catch (error) {
+            
+        }
+    }
+
+    function setToken(token) {
+        localStorage.setItem('auth_token', token)
+        axios.defaults.headers.common.Authorization = `Bearer ${token}`
+    }
+
+    function removeToken() {
+        localStorage.removeItem('auth_token')
+        axios.defaults.headers.common.Authorization = `Bearer `
+    }
+
     return {
-        registration
+        registration,
+        login
     }
 }
