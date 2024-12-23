@@ -9,7 +9,10 @@ const router = createRouter({
         {
             path: '/',
             name: 'Beranda',
-            component: Home
+            component: Home,
+            meta: {
+                authRequired: true
+            },
         },
         {
             path: '/masuk',
@@ -22,6 +25,26 @@ const router = createRouter({
             component: Registration
         }
     ]
+})
+
+router.beforeEach((to, from, next) => {
+    const isLoggedIn = localStorage.getItem('auth_token')
+
+    if (to.matched.some((record) => record.meta.guestRequired)) {
+        if (isLoggedIn == null) {
+            next()
+        } else {
+            next('/')
+        }
+    } else if (to.matched.some((record) => record.meta.authRequired)) {
+        if (isLoggedIn == null) {
+            next('/masuk')
+        } else {
+            next()
+        }
+    } else {
+        next()
+    }
 })
 
 export default router
