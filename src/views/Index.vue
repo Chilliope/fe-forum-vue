@@ -10,7 +10,7 @@
                     <div class="w-16">
                         <img :src="'default.jpg'" alt="" class="w-12 h-12 rounded-full">
                     </div>
-                    <input type="text" class="w-full rounded-lg px-4 outline-none" placeholder="Ayo cerita dulu bre...">
+                    <input type="text" class="w-full rounded-lg px-4 outline-none" placeholder="Bikin forum bre...">
                 </div>
                 <div class="flex justify-end">
                     <button class="bg-black hover:bg-slate-700 hover:duration-150 text-white rounded-lg px-6 py-2 mt-4">Post</button>
@@ -20,7 +20,7 @@
             <hr class="my-6 lg:my-8">
     
             <div class="flex flex-col gap-4">
-                <div class="border w-full h-max rounded-lg px-4 py-2" v-for="item in 10" :key="item">
+                <div class="border w-full h-max rounded-lg px-4 py-2" v-for="forum in forum" :key="forum.id">
                     <div class="flex">
                         <div class="w-16">
                             <img :src="'default.jpg'" alt="" class="w-12 h-12 rounded-full">
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="mt-4">
-                        lorem ipsum dolor sit amet consectious.
+                        {{ forum.title }}
                     </div>
                     <hr class="my-4 lg:my-6">
                     <div class="flex justify-between">
@@ -50,6 +50,13 @@
 <script setup>
 import NavbarComponent from '../components/NavbarComponent.vue'
 import SidebarComponent from '../components/SidebarComponent.vue'
+import { onMounted } from 'vue'
+import useForum from '../service/data/forum';
 
+const { forum, getForum } = useForum()
+
+onMounted(() => {
+    getForum()
+})
 </script>
 
