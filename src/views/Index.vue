@@ -23,11 +23,11 @@
                 <div class="border w-full h-max rounded-lg px-4 py-2" v-for="forum in forum" :key="forum.id">
                     <div class="flex">
                         <div class="w-16">
-                            <img :src="'default.jpg'" alt="" class="w-12 h-12 rounded-full">
+                            <img :src="'/storage/profile_picture/' + forum.image" alt="" class="w-12 h-12 rounded-full">
                         </div>
                         <div class="flex flex-col">
-                            <span>Erlang Andriyanputra</span>
-                            <span class="text-slate-500 text-sm">@chilliope</span>
+                            <span>{{ forum.fullname }}</span>
+                            <span class="text-slate-500 text-sm">@{{ forum.username }}</span>
                         </div>
                     </div>
                     <div class="mt-4">
