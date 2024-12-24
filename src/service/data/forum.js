@@ -1,13 +1,17 @@
 import axios from '../axios'
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 
 export default function useForum() {
     const forum = ref([])
+    const totalPage = ref([])
+    const route = useRoute()
 
     async function getForum() {
         try {
-            const response = await axios.get('/forum')
+            const response = await axios.get(`/forum?page=${route.params.page}`)
             console.log(response.data)
+            totalPage.value = response.data.pagination.totalPage
             forum.value = response.data.data
         } catch (error) {
             
@@ -16,6 +20,7 @@ export default function useForum() {
 
     return {
         getForum,
-        forum
+        forum,
+        totalPage
     }
 }

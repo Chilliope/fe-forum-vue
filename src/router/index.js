@@ -7,7 +7,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: '/',
+            path: '/beranda/forum/:page',
             name: 'Beranda',
             component: Home,
             meta: {

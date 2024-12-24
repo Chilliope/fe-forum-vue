@@ -44,16 +44,77 @@
                 </div>
             </div>
         </div>
+
+        <div class="flex justify-end mt-8 pb-8 px-4">
+            <div
+            class="border shadow-sm w-full lg:w-max h-max p-3 rounded-lg flex justify-between items-center"
+            >
+            <!-- Tombol Previous -->
+            <div class="px-4">
+                <router-link
+                :to="'' + (parseInt(route.params.page) - 1)"
+                :class="{
+                    'text-blue-500': parseInt(route.params.page) > 1,
+                    'text-gray-500 pointer-events-none':
+                    parseInt(route.params.page) <= 1,
+                }"
+                >
+                <i class="fa-solid fa-circle-chevron-left"></i>
+                </router-link>
+            </div>
+
+            <!-- Pagination Links -->
+            <div class="px-4">
+                <ul class="flex gap-4">
+                <li v-for="page in totalPage" :key="page">
+                    <router-link
+                    :to="'' + page"
+                    :class="{
+                        'font-bold text-blue-500': parseInt(route.params.page) === page,
+                        'text-blue-500': parseInt(route.params.page) !== page,
+                    }"
+                    >
+                    {{ page }}
+                    </router-link>
+                </li>
+                </ul>
+            </div>
+
+            <!-- Tombol Next -->
+            <div class="px-4">
+                <router-link
+                :to="'' + (parseInt(route.params.page) + 1)"
+                :class="{
+                    'text-blue-500': parseInt(route.params.page) < totalPage,
+                    'text-gray-500 pointer-events-none':
+                    parseInt(route.params.page) >= totalPage,
+                }"
+                >
+                <i class="fa-solid fa-circle-chevron-right"></i>
+                </router-link>
+            </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
 <script setup>
 import NavbarComponent from '../components/NavbarComponent.vue'
 import SidebarComponent from '../components/SidebarComponent.vue'
-import { onMounted } from 'vue'
-import useForum from '../service/data/forum';
+import { onMounted, watch } from 'vue'
+import useForum from '../service/data/forum'
+import { useRoute } from 'vue-router'
 
-const { forum, getForum } = useForum()
+const route = useRoute()
+const { forum, getForum, totalPage } = useForum()
+
+watch(
+    () => route.params.page,
+    () => {
+        getForum()
+    }
+)
 
 onMounted(() => {
     getForum()
