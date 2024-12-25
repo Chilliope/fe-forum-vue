@@ -36,7 +36,7 @@
                     <hr class="my-4 lg:my-6">
                     <div class="flex justify-between">
                         <div class="flex gap-4">
-                            <router-link to="" class="text-slate-500 border px-2 py-2 rounded-lg"><i class="fa-regular fa-comments"></i> 1</router-link>
+                            <router-link to="" class="text-slate-500 border px-2 py-2 rounded-lg"><i class="fa-regular fa-comments"></i> {{ forum.post_count }}</router-link>
                             <router-link to="" class="text-slate-500 border px-4 py-2 rounded-lg"><i class="fa-regular fa-share-from-square"></i></router-link>
                         </div>
                         <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-400 hover:duration-150"><i class="fa-solid fa-bullhorn"></i></button>
