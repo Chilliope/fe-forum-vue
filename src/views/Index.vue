@@ -8,7 +8,7 @@
             <form action="" class="border px-4 py-2 rounded-lg flex flex-col">
                 <div class="flex gap-2 border-b pb-4">
                     <div class="w-16">
-                        <img :src="'default.jpg'" alt="" class="w-12 h-12 rounded-full">
+                        <img :src="'/storage/profile_picture/' + user.image" alt="" class="w-12 h-12 rounded-full">
                     </div>
                     <input type="text" class="w-full rounded-lg px-4 outline-none" placeholder="Bikin forum bre...">
                 </div>
@@ -105,9 +105,11 @@ import SidebarComponent from '../components/SidebarComponent.vue'
 import { onMounted, watch } from 'vue'
 import useForum from '../service/data/forum'
 import { useRoute } from 'vue-router'
+import useAuth from '../service/auth'
 
 const route = useRoute()
 const { forum, getForum, totalPage } = useForum()
+const { authUser, user } = useAuth()
 
 watch(
     () => route.params.page,
@@ -118,6 +120,7 @@ watch(
 
 onMounted(() => {
     getForum()
+    authUser()
 })
 </script>
 

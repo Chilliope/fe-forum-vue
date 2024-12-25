@@ -10,7 +10,6 @@ export default function useForum() {
     async function getForum() {
         try {
             const response = await axios.get(`/forum?page=${route.params.page}`)
-            console.log(response.data)
             totalPage.value = response.data.pagination.totalPage
             forum.value = response.data.data
         } catch (error) {

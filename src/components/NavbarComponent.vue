@@ -10,11 +10,11 @@
         </div>
         <div class="w-full hidden lg:flex justify-end gap-4">
             <div>
-                <img :src="'default.jpg'" alt="" class="w-14 h-14 object-cover rounded-full">
+                <img :src="'/storage/profile_picture/' + user.image" alt="" class="w-14 h-14 object-cover rounded-full">
             </div>
             <div class="flex flex-col items-center justify-center">
-                <span class="text-lg font-medium">Erlang Andriyanputra</span>
-                <span>@chilliope</span>
+                <span class="text-lg font-medium">{{ user.fullname }}</span>
+                <span>@{{ user.username }}</span>
             </div>
         </div>
     </nav>
@@ -73,8 +73,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import useAuth from '../service/auth'
+
+const { authUser, user } = useAuth()
+
+onMounted(() => {
+    authUser()
+})
 
 const route = useRoute()
 

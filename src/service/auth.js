@@ -1,3 +1,4 @@
+import { ref } from 'vue'
 import axios from './axios'
 import useSwal from './swal'
 import { useRouter } from 'vue-router'
@@ -5,6 +6,7 @@ import { useRouter } from 'vue-router'
 export default function useAuth() {
     const router = useRouter()
     const { accepted, rejected, confirm } = useSwal()
+    const user = ref({})
 
     async function registration(payload) {
         try {
@@ -19,7 +21,16 @@ export default function useAuth() {
         try {
             const response = await axios.post('/login', payload)
             setToken(response.data.data.token)
-            router.push('/')
+            router.push('/beranda/forum/1')
+        } catch (error) {
+            rejected('Kayaknya username atau password lu salah deh')
+        }
+    }
+
+    async function authUser() {
+        try {
+            const response = await axios.post('/authUser')
+            user.value = response.data.user
         } catch (error) {
             
         }
@@ -37,6 +48,8 @@ export default function useAuth() {
 
     return {
         registration,
-        login
+        login,
+        authUser,
+        user
     }
 }
