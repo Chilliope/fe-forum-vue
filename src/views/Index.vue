@@ -5,12 +5,12 @@
     </div>
     <div class="lg:pl-96 pl-0">
         <div class="px-4 py-2">
-            <form action="" class="border px-4 py-2 rounded-lg flex flex-col">
+            <form @submit.prevent="doCreateForum()" class="border px-4 py-2 rounded-lg flex flex-col">
                 <div class="flex gap-2 border-b pb-4">
                     <div class="w-16">
                         <img :src="'/storage/profile_picture/' + user.image" alt="" class="w-12 h-12 rounded-full">
                     </div>
-                    <input type="text" class="w-full rounded-lg px-4 outline-none" placeholder="Bikin forum bre...">
+                    <input type="text" class="w-full rounded-lg px-4 outline-none" placeholder="Bikin forum bre..." v-model="forms.title">
                 </div>
                 <div class="flex justify-end">
                     <button class="bg-black hover:bg-slate-700 hover:duration-150 text-white rounded-lg px-6 py-2 mt-4">Post</button>
@@ -102,13 +102,13 @@
 <script setup>
 import NavbarComponent from '../components/NavbarComponent.vue'
 import SidebarComponent from '../components/SidebarComponent.vue'
-import { onMounted, watch } from 'vue'
+import { onMounted, watch, reactive } from 'vue'
 import useForum from '../service/data/forum'
 import { useRoute } from 'vue-router'
 import useAuth from '../service/auth'
 
 const route = useRoute()
-const { forum, getForum, totalPage } = useForum()
+const { forum, getForum, totalPage, createForum } = useForum()
 const { authUser, user } = useAuth()
 
 watch(
@@ -122,5 +122,13 @@ onMounted(() => {
     getForum()
     authUser()
 })
+
+const forms = reactive({
+    title: ''
+})
+
+function doCreateForum() {
+    createForum({...forms})
+}
 </script>
 

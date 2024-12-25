@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 
 export default function useSwal() {
-    async function accepted(test) {
+    async function accepted(text) {
         await Swal.fire({
             width: '250px',
             icon: 'success',
