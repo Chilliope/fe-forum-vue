@@ -1,18 +1,29 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../views/auth/Login.vue'
 import Registration from '../views/auth/Registration.vue'
-import Home from '../views/Index.vue'
+import Index from '../views/Index.vue'
+import Forum from '../views/forum/Index.vue'
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: '/beranda/forum/:page',
-            name: 'Beranda',
-            component: Home,
+            path: '/',
+            name: 'Index',
+            redirect: { 
+                path: '/beranda/forum/:page' 
+            },
+            component: Index,
             meta: {
                 authRequired: true
             },
+            children: [
+                {
+                    path: '/beranda/forum/:page',
+                    name: 'Beranda',
+                    component: Forum
+                }
+            ]
         },
         {
             path: '/masuk',
