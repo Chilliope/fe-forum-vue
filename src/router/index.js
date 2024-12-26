@@ -25,7 +25,7 @@ const router = createRouter({
                     component: Forum
                 },
                 {
-                    path: '/post/:idForum',
+                    path: '/post/:forumId',
                     name: 'Post',
                     component: Post
                 }
