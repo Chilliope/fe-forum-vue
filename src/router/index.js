@@ -3,6 +3,7 @@ import Login from '../views/auth/Login.vue'
 import Registration from '../views/auth/Registration.vue'
 import Index from '../views/Index.vue'
 import Forum from '../views/forum/Index.vue'
+import Post from '../views/post/Index.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -22,6 +23,11 @@ const router = createRouter({
                     path: '/beranda/forum/:page',
                     name: 'Beranda',
                     component: Forum
+                },
+                {
+                    path: '/post/:idForum',
+                    name: 'Post',
+                    component: Post
                 }
             ]
         },

@@ -56,7 +56,7 @@
         <div class="flex justify-between">
           <div class="flex gap-4">
             <router-link
-              to=""
+              :to="'/post/' + forum.forum_id"
               class="text-slate-500 border px-2 py-2 rounded-lg"
               ><i class="fa-regular fa-comments"></i>
               {{ forum.post_count }}</router-link
