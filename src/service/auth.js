@@ -27,12 +27,22 @@ export default function useAuth() {
         }
     }
 
+    async function logout() {
+        try {
+            removeToken()
+            router.push('/masuk')
+        } catch (error) {
+            rejected('Gagal Logout, coba lagi')
+        }
+    }
+
     async function authUser() {
         try {
             const response = await axios.post('/authUser')
             user.value = response.data.user
         } catch (error) {
-            
+            removeToken()
+            router.push('/masuk')
         }
     }
 
@@ -50,6 +60,7 @@ export default function useAuth() {
         registration,
         login,
         authUser,
-        user
+        user,
+        logout
     }
 }
