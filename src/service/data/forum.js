@@ -24,11 +24,25 @@ export default function useForum() {
         try {
             const response = await axios.post('/forum', payload)
             accepted('Forum berhasil dibuat cuy')
-            setInterval(() => {
-                window.location.reload()
-            }, 1500);
+            getForum()
         } catch (error) {
             rejected('Yahh forum gagal dibuat')
+        }
+    }
+
+    async function deleteForum(id) {
+        const response = await confirm('lu yakin mau hapus forum ini?')
+        
+        if(response.isConfirmed) {
+            try {
+                const response = await axios.delete(`/forum/${id}`)
+                accepted('Forum berhasil dihapus')
+                setInterval(() => {
+                    location.reload()
+                }, 1500);
+            } catch (error) {
+                rejected('forum gagal dihapus nih bre, coba lagi')
+            }
         }
     }
 
@@ -36,6 +50,7 @@ export default function useForum() {
         getForum,
         forum,
         totalPage,
-        createForum
+        createForum,
+        deleteForum
     }
 }

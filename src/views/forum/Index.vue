@@ -57,15 +57,21 @@
           <div class="flex gap-4">
             <router-link
               :to="'/post/' + forum.forum_id"
-              class="text-slate-500 border px-2 py-2 rounded-lg"
+              class="text-slate-500 border px-2 py-2 rounded-lg hover:bg-slate-200 hover:duration-150"
               ><i class="fa-regular fa-comments"></i>
               {{ forum.post_count }}</router-link
             >
             <router-link
               to=""
-              class="text-slate-500 border px-4 py-2 rounded-lg"
+              class="text-slate-500 border px-4 py-2 rounded-lg hover:bg-slate-200 hover:duration-150"
               ><i class="fa-regular fa-share-from-square"></i
             ></router-link>
+            <div class="flex gap-4" v-if="forum.username == user.username">
+              <form @submit.prevent="deleteForum(forum.forum_id)">
+                <button class="text-slate-500 border px-2 py-2 rounded-lg hover:bg-red-200 hover:text-red-500 hover:duration-150"><i class="fa-regular fa-trash-can"></i></button>
+              </form>
+              <button class="text-slate-500 border px-2 py-2 rounded-lg hover:bg-blue-200 hover:text-blue-500 hover:duration-150"><i class="fa-regular fa-pen-to-square"></i></button>
+            </div>
           </div>
           <button
             class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-400 hover:duration-150"
@@ -136,7 +142,7 @@ import { useRoute } from 'vue-router'
 import useAuth from '../../service/auth'
 
 const route = useRoute()
-const { forum, getForum, totalPage, createForum } = useForum()
+const { forum, getForum, totalPage, createForum, deleteForum } = useForum()
 const { authUser, user } = useAuth()
 
 watch(
