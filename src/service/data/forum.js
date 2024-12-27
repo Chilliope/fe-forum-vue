@@ -37,9 +37,7 @@ export default function useForum() {
             try {
                 const response = await axios.delete(`/forum/${id}`)
                 accepted('Forum berhasil dihapus')
-                setInterval(() => {
-                    location.reload()
-                }, 1500);
+                getForum()
             } catch (error) {
                 rejected('forum gagal dihapus nih bre, coba lagi')
             }
