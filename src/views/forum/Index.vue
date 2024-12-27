@@ -70,7 +70,7 @@
               <form @submit.prevent="deleteForum(forum.forum_id)">
                 <button class="text-slate-500 border px-2 py-2 rounded-lg hover:bg-red-200 hover:text-red-500 hover:duration-150"><i class="fa-regular fa-trash-can"></i></button>
               </form>
-              <button class="text-slate-500 border px-2 py-2 rounded-lg hover:bg-blue-200 hover:text-blue-500 hover:duration-150"><i class="fa-regular fa-pen-to-square"></i></button>
+              <button @click="togglePopupEditForum(forum.forum_id)" class="text-slate-500 border px-2 py-2 rounded-lg hover:bg-blue-200 hover:text-blue-500 hover:duration-150"><i class="fa-regular fa-pen-to-square"></i></button>
             </div>
           </div>
           <button
@@ -133,16 +133,42 @@
       </div>
     </div>
   </div>
+
+  <div id="popupEditForum" class="bg-black w-full min-h-screen fixed top-0 left-0 bg-opacity-50 flex items-center justify-center px-4 lg:px-0" :class="{ 'translate-y-0': isPopupEditForum, 'translate-y-full': !isPopupEditForum }">
+    <form @submit.prevent="doEditForum()" class="bg-white w-full lg:w-1/4 h-max rounded-lg px-4 py-2">
+      <h5 class="text-lg font-medium">Edit Forum</h5>
+      <div class="mt-4 px-3 pb-1 border-b">
+        <input type="text" placeholder="Edit Forum Euy..." class="outline-none w-full" v-model="formsEdit.title">
+      </div>
+        <div class="flex justify-between mt-4">
+          <button @click="closePopupEditForum()" type="button" class="border border-slate-500 text-slate-500 px-4 py-2 rounded-lg hover:bg-slate-200 hover:duration-150">Gajadi</button>
+          <button type="submit" class="bg-black text-white px-4 py-2 rounded-lg hover:bg-slate-700  hover:duration-150">Simpan</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script setup>
-import { onMounted, watch, reactive } from 'vue'
+import { onMounted, watch, reactive, ref } from 'vue'
 import useForum from '../../service/data/forum'
 import { useRoute } from 'vue-router'
 import useAuth from '../../service/auth'
 
+const isPopupEditForum = ref(false)
+const currentForumId = ref(null);
+
+function togglePopupEditForum(forumId) {
+  isPopupEditForum.value = !isPopupEditForum.value
+
+  currentForumId.value = forumId
+}
+
+function closePopupEditForum() {
+  isPopupEditForum.value = false
+}
+
 const route = useRoute()
-const { forum, getForum, totalPage, createForum, deleteForum } = useForum()
+const { forum, getForum, totalPage, createForum, deleteForum, editForum } = useForum()
 const { authUser, user } = useAuth()
 
 watch(
@@ -161,7 +187,15 @@ const forms = reactive({
     title: ''
 })
 
+const formsEdit = reactive({
+  title: ''
+})
+
 function doCreateForum() {
     createForum({...forms})
+}
+
+function doEditForum() {
+  editForum(currentForumId.value, formsEdit)
 }
 </script>

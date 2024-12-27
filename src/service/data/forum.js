@@ -30,6 +30,16 @@ export default function useForum() {
         }
     }
 
+    async function editForum(forumId, payload) {
+        try {
+            const response = await axios.patch(`/forum/${forumId}`, payload)
+            accepted('Forum berhasil diedit')
+            getForum()
+        } catch (error) {
+            
+        }
+    }
+
     async function deleteForum(id) {
         const response = await confirm('lu yakin mau hapus forum ini?')
         
@@ -49,6 +59,7 @@ export default function useForum() {
         forum,
         totalPage,
         createForum,
-        deleteForum
+        deleteForum,
+        editForum
     }
 }
