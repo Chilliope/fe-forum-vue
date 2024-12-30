@@ -32,7 +32,7 @@ const router = createRouter({
                 },
                 {
                     path: '/sirkel',
-                    name: 'sirkel',
+                    name: 'Sirkel',
                     component: Circle
                 },
                 {
