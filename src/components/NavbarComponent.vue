@@ -104,7 +104,7 @@ function isActive(name) {
 const mains = [
     { icon: 'fa-solid fa-house', name: 'Beranda', url: '/' },
     { icon: 'fa-solid fa-bug', name: 'Update', url: '/' },
-    { icon: 'fa-solid fa-user-group', name: 'Sirkel', url: '/' },
+    { icon: 'fa-solid fa-user-group', name: 'Sirkel', url: '/circle' },
 ]
 
 const dashboards = [

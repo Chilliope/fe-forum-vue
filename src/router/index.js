@@ -4,6 +4,7 @@ import Registration from '../views/auth/Registration.vue'
 import Index from '../views/Index.vue'
 import Forum from '../views/forum/Index.vue'
 import Post from '../views/post/Index.vue'
+import Circle from '../views/circle/Index.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -12,7 +13,7 @@ const router = createRouter({
             path: '/',
             name: 'Index',
             redirect: { 
-                path: '/beranda/forum/:page' 
+                path: '/beranda/forum/1' 
             },
             component: Index,
             meta: {
@@ -28,6 +29,11 @@ const router = createRouter({
                     path: '/post/:forumId',
                     name: 'Post',
                     component: Post
+                },
+                {
+                    path: '/circle',
+                    name: 'Circle',
+                    component: Circle
                 }
             ]
         },
