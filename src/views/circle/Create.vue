@@ -2,7 +2,7 @@
     <div class="px-4 py-2">
         <form @submit.prevent="doCreateCircle()" class="border w-full h-max rounded-lg flex flex-col" enctype="multipart/form-data">
             <div class="px-4 py-2">
-                <input required type="text" class="border-b w-full flex pb-4 text-slate-500 text-lg lg:text-xl outline-none" placeholder="Ketik nama sirkel nya..." v-model="circle_name">
+                <input required type="text" class="border-b w-full flex pb-4 text-slate-500 text-lg lg:text-xl outline-none" placeholder="Ketik nama sirkel nya..." v-model="forms.circle_name" id="circle_name">
             </div>
             <div class="px-4 py-2">
                 <input required type="file" class="border-b w-full flex pb-4 text-slate-500 text-lg lg:text-xl outline-none" @change="handleFileUpload" id="circle_image">
@@ -31,6 +31,7 @@ function handleFileUpload(event) {
 
 function doCreateCircle() {
     const formData = new FormData()
+    console.log(forms.value)
     for (const key in forms.value) {
         formData.append(key, forms.value[key])
     }
