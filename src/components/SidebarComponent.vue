@@ -59,7 +59,7 @@
         {
             icon: 'fa-solid fa-user-group',
             name: 'Sirkel',
-            url: '/circle'
+            url: '/sirkel'
         }
     ]
 

@@ -31,9 +31,14 @@ const router = createRouter({
                     component: Post
                 },
                 {
-                    path: '/circle',
-                    name: 'Circle',
+                    path: '/sirkel',
+                    name: 'sirkel',
                     component: Circle
+                },
+                {
+                    path: '/tambah-sirkel',
+                    name: 'Tambah Sirkel',
+                    component: () => import('../views/circle/Create.vue')
                 }
             ]
         },
